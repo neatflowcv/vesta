@@ -1,0 +1,534 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Default module",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "instance"
+    },
+    {
+      "name": "base"
+    }
+  ],
+  "paths": {
+    "/vesta/v1/instances": {
+      "get": {
+        "summary": "list instances",
+        "deprecated": false,
+        "description": "",
+        "operationId": "list.instances",
+        "tags": [
+          "instance"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Instance"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/vesta/v1/instances/{id}": {
+      "delete": {
+        "summary": "delete instance",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "instance"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "instance_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/vesta/v1/instances/{id}/start": {
+      "post": {
+        "summary": "start instance",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "instance"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Instance"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "instance_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/vesta/v1/instances/{id}/stop": {
+      "post": {
+        "summary": "stop instance",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "instance"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Instance"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "instance_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/vesta/v1/instances/{id}/promote": {
+      "post": {
+        "summary": "promote instance",
+        "deprecated": false,
+        "description": "instance를 base로 승격한다.",
+        "tags": [
+          "base",
+          "instance"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "instance_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/vesta/v1/bases": {
+      "get": {
+        "summary": "list bases",
+        "deprecated": false,
+        "description": "",
+        "operationId": "list.bases",
+        "tags": [
+          "base"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Base"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/vesta/v1/bases/{id}": {
+      "delete": {
+        "summary": "delete base",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "base"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "base_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "base_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/vesta/v1/bases/{id}/clone": {
+      "post": {
+        "summary": "clone base",
+        "deprecated": false,
+        "description": "base를 기반으로 instance를 생성한다.",
+        "tags": [
+          "base",
+          "instance"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "storage": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "description": "byte 단위, 설정하지 않으면 기존 base storage 크기 유지"
+                  },
+                  "ram": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "description": "byte 단위, 설정하지 않으면 기존 base ram 크기 유지"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "storage": {
+                      "type": "integer",
+                      "format": "uint64"
+                    },
+                    "ram": {
+                      "type": "integer",
+                      "format": "uint64"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "storage",
+                    "ram",
+                    "id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "base_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "base_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "",
+                  "type": "object",
+                  "properties": {
+                    "base_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "base_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "webhooks": {},
+  "components": {
+    "schemas": {
+      "Status": {
+        "type": "string",
+        "enum": [
+          "Booting",
+          "Running",
+          "Stopped",
+          "Stopping",
+          "Unknown"
+        ]
+      },
+      "Instance": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status"
+        ]
+      },
+      "Base": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "cpu": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "ram": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "storage": {
+            "type": "integer",
+            "format": "uint64"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "storage",
+          "ram",
+          "cpu"
+        ]
+      }
+    },
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}

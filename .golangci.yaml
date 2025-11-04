@@ -6,3 +6,8 @@ linters:
     - depguard
     - tagliatelle
     - wsl # deprecated
+  settings:
+    ireturn:
+      allow:
+        - ResponseObject$
+        - error
