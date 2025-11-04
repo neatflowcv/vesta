@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -33,7 +35,20 @@ func (h *Handler) DeleteVestaV1InstancesId(
 	ctx context.Context,
 	request api.DeleteVestaV1InstancesIdRequestObject,
 ) (api.DeleteVestaV1InstancesIdResponseObject, error) {
-	panic("unimplemented")
+	log.Println("Deleting instance:", request.Id)
+
+	err := h.service.DeleteInstance(ctx, request.Id)
+	if err != nil {
+		if errors.Is(err, flow.ErrInstanceNotFound) {
+			return api.DeleteVestaV1InstancesId404JSONResponse{
+				InstanceId: request.Id,
+			}, nil
+		}
+
+		return nil, fmt.Errorf("failed to delete instance: %w", err)
+	}
+
+	return api.DeleteVestaV1InstancesId204Response{}, nil
 }
 
 func (h *Handler) ListBases(

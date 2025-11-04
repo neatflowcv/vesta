@@ -2,6 +2,7 @@ package flow
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/neatflowcv/vesta/internal/pkg/domain"
@@ -25,4 +26,17 @@ func (s *Service) ListInstances(ctx context.Context) ([]*domain.Instance, error)
 	}
 
 	return instances, nil
+}
+
+func (s *Service) DeleteInstance(ctx context.Context, id string) error {
+	err := s.repository.DeleteInstance(ctx, id)
+	if err != nil {
+		if errors.Is(err, repository.ErrInstanceNotFound) {
+			return ErrInstanceNotFound
+		}
+
+		return fmt.Errorf("failed to delete instance: %w", err)
+	}
+
+	return nil
 }

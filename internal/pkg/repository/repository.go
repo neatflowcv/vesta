@@ -8,4 +8,5 @@ import (
 
 type Repository interface {
 	ListInstances(ctx context.Context) ([]*domain.Instance, error)
+	DeleteInstance(ctx context.Context, id string) error
 }
