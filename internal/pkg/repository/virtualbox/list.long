@@ -1,0 +1,235 @@
+Name:                        archlinux
+Encryption:                  disabled
+Groups:                      /
+Platform Architecture:       x86
+Guest OS:                    Arch Linux (64-bit)
+UUID:                        d3854f3b-225f-431e-9a9b-83ef36718ca3
+Config file:                 /home/biosvos/VirtualBox VMs/archlinux/archlinux.vbox
+Snapshot folder:             /home/biosvos/VirtualBox VMs/archlinux/Snapshots
+Log folder:                  /home/biosvos/VirtualBox VMs/archlinux/Logs
+Hardware UUID:               d3854f3b-225f-431e-9a9b-83ef36718ca3
+Memory size:                 4096MB
+Page Fusion:                 disabled
+VRAM size:                   128MB
+CPU exec cap:                100%
+CPUProfile:                  host
+Chipset:                     piix3
+Firmware:                    EFI
+Number of CPUs:              4
+HPET:                        disabled
+PAE:                         enabled
+Long Mode:                   enabled
+Triple Fault Reset:          disabled
+APIC:                        enabled
+X2APIC:                      enabled
+Nested VT-x/AMD-V:           enabled
+CPUID overrides:             None
+Hardware Virtualization:     enabled
+Nested Paging:               enabled
+Large Pages:                 disabled
+VT-x VPID:                   enabled
+VT-x Unrestricted Exec.:     enabled
+AMD-V Virt. Vmsave/Vmload:   enabled
+CPUID Portability Level:     0
+Boot menu mode:              message and menu
+Boot Device 1:               Floppy
+Boot Device 2:               DVD
+Boot Device 3:               HardDisk
+Boot Device 4:               Not Assigned
+ACPI:                        enabled
+IOAPIC:                      enabled
+BIOS APIC mode:              APIC
+Time offset:                 0ms
+BIOS NVRAM File:             /home/biosvos/VirtualBox VMs/archlinux/archlinux.nvram
+UEFI Secure Boot:            disabled
+RTC:                         UTC
+IOMMU:                       None
+Paravirt. Provider:          KVM
+Effective Paravirt. Prov.:   KVM
+State:                       powered off (since 2025-11-04T12:50:05.503000000)
+Graphics Controller:         VMSVGA
+Monitor count:               1
+3D Acceleration:             enabled
+Teleporter Enabled:          disabled
+Teleporter Port:             0
+Teleporter Address:          
+Teleporter Password:         
+Tracing Enabled:             disabled
+Allow Tracing to Access VM:  disabled
+Tracing Configuration:       
+Autostart Enabled:           disabled
+Autostart Delay:             0
+Default Frontend:            
+VM process priority:         default
+Storage Controllers:
+#0: 'IDE', Type: PIIX4, Instance: 0, Ports: 2 (max 2), Bootable
+  Port 0, Unit 0: Empty
+#1: 'SATA', Type: IntelAhci, Instance: 0, Ports: 1 (max 30), Bootable
+  Port 0, Unit 0: UUID: 43f67a74-6723-41a6-b22b-5f62fb1335c5
+    Location: "/home/biosvos/VirtualBox VMs/archlinux/Snapshots/{43f67a74-6723-41a6-b22b-5f62fb1335c5}.vdi"
+NIC 1:                       MAC: 080027F64932, Attachment: NAT, Cable connected: on, Trace: off (file: none), Type: 82540EM, Reported speed: 0 Mbps, Boot priority: 0, Promisc Policy: deny, Bandwidth group: none
+NIC 1 Settings:
+	MTU: 0, Socket (send: 64, receive: 64), TCP Window (send:64, receive: 64),
+	LocalhostReachable: 1, ForwardBroadcast: 0, EnableTFTP: 0
+NIC 2:                       MAC: 080027093F5D, Attachment: Host-only Interface 'vboxnet0', Cable connected: on, Trace: off (file: none), Type: 82540EM, Reported speed: 0 Mbps, Boot priority: 0, Promisc Policy: deny, Bandwidth group: none
+NIC 3:                       disabled
+NIC 4:                       disabled
+NIC 5:                       disabled
+NIC 6:                       disabled
+NIC 7:                       disabled
+NIC 8:                       disabled
+Pointing Device:             USB Tablet
+Keyboard Device:             PS/2 Keyboard
+UART 1:                      disabled
+UART 2:                      disabled
+UART 3:                      disabled
+UART 4:                      disabled
+LPT 1:                       disabled
+LPT 2:                       disabled
+Audio:                       enabled (Driver: Default, Controller: AC97, Codec: AD1980)
+Audio playback:              enabled
+Audio capture:               disabled
+Clipboard Mode:              disabled
+Clipboard file transfers:    disabled
+Drag and drop Mode:          disabled
+VRDE:                        disabled
+OHCI USB:                    enabled
+EHCI USB:                    enabled
+xHCI USB:                    disabled
+USB Device Filters:          <none>
+Bandwidth groups:            <none>
+Shared folders:              <none>
+Recording status:            stopped
+Recording enabled:           no
+Recording screens:           1
+ Screen 0:
+    Enabled:                 yes
+    ID:                      0
+    Record video:            yes
+    Destination:             File
+    File:                    /home/biosvos/VirtualBox VMs/archlinux/archlinux-screen0.webm
+    Options:                 ac_profile=med
+    Video dimensions:        1024x768
+    Video rate:              512kbps
+    Video FPS:               25fps
+* Snapshots:
+   Name: base waydroid (UUID: 4ef8d010-d59b-4b1d-b59e-0c5b0ab7f8ae) *
+* Guest:
+Configured memory balloon:   0MB
+
+Name:                        archlinux Clone
+Encryption:                  disabled
+Groups:                      /
+Platform Architecture:       x86
+Guest OS:                    Arch Linux (64-bit)
+UUID:                        544649c9-6c73-4f47-8664-4ebbfe96d333
+Config file:                 /home/biosvos/VirtualBox VMs/archlinux Clone/archlinux Clone.vbox
+Snapshot folder:             /home/biosvos/VirtualBox VMs/archlinux Clone/Snapshots
+Log folder:                  /home/biosvos/VirtualBox VMs/archlinux Clone/Logs
+Hardware UUID:               544649c9-6c73-4f47-8664-4ebbfe96d333
+Memory size:                 4096MB
+Page Fusion:                 disabled
+VRAM size:                   128MB
+CPU exec cap:                100%
+CPUProfile:                  host
+Chipset:                     piix3
+Firmware:                    EFI
+Number of CPUs:              4
+HPET:                        disabled
+PAE:                         enabled
+Long Mode:                   enabled
+Triple Fault Reset:          disabled
+APIC:                        enabled
+X2APIC:                      enabled
+Nested VT-x/AMD-V:           enabled
+CPUID overrides:             None
+Hardware Virtualization:     enabled
+Nested Paging:               enabled
+Large Pages:                 disabled
+VT-x VPID:                   enabled
+VT-x Unrestricted Exec.:     enabled
+AMD-V Virt. Vmsave/Vmload:   enabled
+CPUID Portability Level:     0
+Boot menu mode:              message and menu
+Boot Device 1:               Floppy
+Boot Device 2:               DVD
+Boot Device 3:               HardDisk
+Boot Device 4:               Not Assigned
+ACPI:                        enabled
+IOAPIC:                      enabled
+BIOS APIC mode:              APIC
+Time offset:                 0ms
+BIOS NVRAM File:             /home/biosvos/VirtualBox VMs/archlinux Clone/archlinux Clone.nvram
+UEFI Secure Boot:            disabled
+RTC:                         UTC
+IOMMU:                       None
+Paravirt. Provider:          KVM
+Effective Paravirt. Prov.:   KVM
+State:                       powered off (since 2025-11-04T12:50:05.503000000)
+Graphics Controller:         VMSVGA
+Monitor count:               1
+3D Acceleration:             enabled
+Teleporter Enabled:          disabled
+Teleporter Port:             0
+Teleporter Address:          
+Teleporter Password:         
+Tracing Enabled:             disabled
+Allow Tracing to Access VM:  disabled
+Tracing Configuration:       
+Autostart Enabled:           disabled
+Autostart Delay:             0
+Default Frontend:            
+VM process priority:         default
+Storage Controllers:
+#0: 'IDE', Type: PIIX4, Instance: 0, Ports: 2 (max 2), Bootable
+  Port 0, Unit 0: Empty
+#1: 'SATA', Type: IntelAhci, Instance: 0, Ports: 1 (max 30), Bootable
+  Port 0, Unit 0: UUID: 1caab784-3a48-4274-81ee-c38e6c4c96dc
+    Location: "/home/biosvos/VirtualBox VMs/archlinux Clone/archlinux Clone.vdi"
+NIC 1:                       MAC: 080027F64932, Attachment: NAT, Cable connected: on, Trace: off (file: none), Type: 82540EM, Reported speed: 0 Mbps, Boot priority: 0, Promisc Policy: deny, Bandwidth group: none
+NIC 1 Settings:
+	MTU: 0, Socket (send: 64, receive: 64), TCP Window (send:64, receive: 64),
+	LocalhostReachable: 1, ForwardBroadcast: 0, EnableTFTP: 0
+NIC 2:                       MAC: 0800271F3825, Attachment: Host-only Interface 'vboxnet0', Cable connected: on, Trace: off (file: none), Type: 82540EM, Reported speed: 0 Mbps, Boot priority: 0, Promisc Policy: deny, Bandwidth group: none
+NIC 3:                       disabled
+NIC 4:                       disabled
+NIC 5:                       disabled
+NIC 6:                       disabled
+NIC 7:                       disabled
+NIC 8:                       disabled
+Pointing Device:             USB Tablet
+Keyboard Device:             PS/2 Keyboard
+UART 1:                      disabled
+UART 2:                      disabled
+UART 3:                      disabled
+UART 4:                      disabled
+LPT 1:                       disabled
+LPT 2:                       disabled
+Audio:                       enabled (Driver: Default, Controller: AC97, Codec: AD1980)
+Audio playback:              enabled
+Audio capture:               disabled
+Clipboard Mode:              disabled
+Clipboard file transfers:    disabled
+Drag and drop Mode:          disabled
+VRDE:                        disabled
+OHCI USB:                    enabled
+EHCI USB:                    enabled
+xHCI USB:                    disabled
+USB Device Filters:          <none>
+Bandwidth groups:            <none>
+Shared folders:              <none>
+Recording status:            stopped
+Recording enabled:           no
+Recording screens:           1
+ Screen 0:
+    Enabled:                 yes
+    ID:                      0
+    Record video:            yes
+    Destination:             File
+    File:                    /home/biosvos/VirtualBox VMs/archlinux Clone/archlinux Clone-screen0.webm
+    Options:                 ac_profile=med
+    Video dimensions:        1024x768
+    Video rate:              512kbps
+    Video FPS:               25fps
+* Guest:
+Configured memory balloon:   0MB

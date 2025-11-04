@@ -2,16 +2,22 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/neatflowcv/vesta/api"
+	"github.com/neatflowcv/vesta/internal/app/flow"
 )
 
-type Handler struct{}
+type Handler struct {
+	service *flow.Service
+}
 
-func NewHandler() http.Handler { //nolint:ireturn
-	handler := &Handler{}
+func NewHandler(service *flow.Service) http.Handler { //nolint:ireturn
+	handler := &Handler{
+		service: service,
+	}
 
 	return api.HandlerFromMux(api.NewStrictHandler(handler, nil), chi.NewMux())
 }
@@ -41,7 +47,16 @@ func (h *Handler) ListInstances(
 	ctx context.Context,
 	request api.ListInstancesRequestObject,
 ) (api.ListInstancesResponseObject, error) {
-	panic("unimplemented")
+	instances, err := h.service.ListInstances(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("failed to list instances: %w", err)
+	}
+
+	if len(instances) == 0 {
+		return api.ListInstances204Response{}, nil
+	}
+
+	return api.ListInstances200JSONResponse(toInstances(instances)), nil
 }
 
 func (h *Handler) PostVestaV1BasesIdClone(
