@@ -43,3 +43,36 @@ func (c *Client) UnregisterVM(ctx context.Context, id string) error {
 
 	return nil
 }
+
+func (c *Client) StartVM(ctx context.Context, id string) error {
+	cmd := exec.CommandContext(ctx, "vboxmanage", "startvm", "--type", "headless", id)
+
+	output, err := cmd.Output()
+	if err != nil {
+		return fmt.Errorf("failed to start VM: %w: %s", err, string(output))
+	}
+
+	return nil
+}
+
+func (c *Client) ShutdownVM(ctx context.Context, id string) error {
+	cmd := exec.CommandContext(ctx, "vboxmanage", "controlvm", id, "shutdown")
+
+	output, err := cmd.Output()
+	if err != nil {
+		return fmt.Errorf("failed to stop VM: %w: %s", err, string(output))
+	}
+
+	return nil
+}
+
+func (c *Client) ShowVMInfo(ctx context.Context, id string) (*VM, error) {
+	cmd := exec.CommandContext(ctx, "vboxmanage", "showvminfo", "--machinereadable", id)
+
+	output, err := cmd.Output()
+	if err != nil {
+		return nil, fmt.Errorf("failed to show VM info: %w: %s", err, string(output))
+	}
+
+	return parseVMs(output)[0], nil
+}
