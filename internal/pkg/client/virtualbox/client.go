@@ -97,6 +97,19 @@ func (r *Client) DeleteInstance(ctx context.Context, id string) error {
 	return nil
 }
 
+func (r *Client) GetBase(ctx context.Context, id string) (*domain.Base, error) {
+	vm, err := r.client.ShowVMInfo(ctx, id)
+	if err != nil {
+		if errors.Is(err, virtualbox.ErrVMNotFound) {
+			return nil, client.ErrInstanceNotFound
+		}
+
+		return nil, fmt.Errorf("failed to get instance: %w", err)
+	}
+
+	return domain.NewBase(vm.ID, vm.Name, vm.CPU, vm.RAM, vm.Storage), nil
+}
+
 func mapVBStateToInstanceStatus(item string) domain.InstanceStatus {
 	idx := strings.Index(item, "(")
 	if idx != -1 {

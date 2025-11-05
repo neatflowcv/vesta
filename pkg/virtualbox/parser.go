@@ -3,6 +3,8 @@ package virtualbox
 import (
 	"bufio"
 	"bytes"
+	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -54,12 +56,17 @@ func split(s string) (string, string) {
 	return parts[0], parts[1]
 }
 
-func parseVM(data []byte) *VM {
+func parseVM(data []byte) (*VM, error) {
 	const size = 2
 
 	name := ""
 	uuid := ""
 	status := ""
+
+	cpu := uint64(0)
+	ram := uint64(0)
+	storage := uint64(0)
+	var err error
 
 	scanner := bufio.NewScanner(bytes.NewReader(data))
 	for scanner.Scan() {
@@ -73,8 +80,19 @@ func parseVM(data []byte) *VM {
 			uuid = strings.Trim(sp[1], "\"")
 		case "VMState":
 			status = strings.Trim(sp[1], "\"")
+		case "cpus":
+			cpu, err = strconv.ParseUint(strings.Trim(sp[1], "\""), 10, 64)
+			if err != nil {
+				return nil, fmt.Errorf("failed to parse CPU: %w", err)
+			}
+		case "memory":
+			ram, err = strconv.ParseUint(strings.Trim(sp[1], "\""), 10, 64)
+			if err != nil {
+				return nil, fmt.Errorf("failed to parse RAM: %w", err)
+			}
+			ram = ram * 1024 * 1024
 		}
 	}
 
-	return NewVM(uuid, name, status)
+	return NewVM(uuid, name, status, cpu, ram, storage), nil
 }

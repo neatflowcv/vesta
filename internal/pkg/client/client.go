@@ -12,4 +12,5 @@ type Client interface {
 	DeleteInstance(ctx context.Context, id string) error
 	StartInstance(ctx context.Context, id string) error
 	StopInstance(ctx context.Context, id string) error
+	GetBase(ctx context.Context, id string) (*domain.Base, error)
 }

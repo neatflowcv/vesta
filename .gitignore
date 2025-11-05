@@ -1,3 +1,4 @@
 /vendor/
 /vesta
 /.vscode/launch.json
+/.cursor/worktrees.json

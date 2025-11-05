@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-11-05T14:38:38Z"
+  labels:
+    app: sweetantonelli-pod
+  name: sweetantonelli-pod
+spec:
+  containers:
+  - args:
+    - redis-server
+    image: docker.io/library/redis:latest
+    name: sweetantonelli
+    ports:
+    - containerPort: 6379
+      hostPort: 6379
+    volumeMounts:
+    - mountPath: /data
+      name: 7cbc7c0db304fd76de8b50db5d2c204c47d4b6bea297b937f52967ceb695e792-pvc
+  volumes:
+  - name: 7cbc7c0db304fd76de8b50db5d2c204c47d4b6bea297b937f52967ceb695e792-pvc
+    persistentVolumeClaim:
+      claimName: 7cbc7c0db304fd76de8b50db5d2c204c47d4b6bea297b937f52967ceb695e792
