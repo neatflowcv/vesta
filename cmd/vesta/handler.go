@@ -92,12 +92,46 @@ func (h *Handler) PostVestaV1InstancesIdStart(
 	ctx context.Context,
 	request api.PostVestaV1InstancesIdStartRequestObject,
 ) (api.PostVestaV1InstancesIdStartResponseObject, error) {
-	panic("unimplemented")
+	instance, err := h.service.StartInstance(ctx, request.Id)
+	if err != nil {
+		if errors.Is(err, flow.ErrInstanceNotFound) {
+			return api.PostVestaV1InstancesIdStart404JSONResponse{
+				InstanceId: request.Id,
+			}, nil
+		}
+
+		if errors.Is(err, flow.ErrInstanceAlreadyRunning) {
+			return api.PostVestaV1InstancesIdStart409JSONResponse{
+				InstanceId: request.Id,
+			}, nil
+		}
+
+		return nil, fmt.Errorf("failed to start instance: %w", err)
+	}
+
+	return api.PostVestaV1InstancesIdStart200JSONResponse(toInstance(instance)), nil
 }
 
 func (h *Handler) PostVestaV1InstancesIdStop(
 	ctx context.Context,
 	request api.PostVestaV1InstancesIdStopRequestObject,
 ) (api.PostVestaV1InstancesIdStopResponseObject, error) {
-	panic("unimplemented")
+	instance, err := h.service.StopInstance(ctx, request.Id)
+	if err != nil {
+		if errors.Is(err, flow.ErrInstanceNotFound) {
+			return api.PostVestaV1InstancesIdStop404JSONResponse{
+				InstanceId: request.Id,
+			}, nil
+		}
+
+		if errors.Is(err, flow.ErrInstanceNotRunning) {
+			return api.PostVestaV1InstancesIdStop409JSONResponse{
+				InstanceId: request.Id,
+			}, nil
+		}
+
+		return nil, fmt.Errorf("failed to stop instance: %w", err)
+	}
+
+	return api.PostVestaV1InstancesIdStop200JSONResponse(toInstance(instance)), nil
 }

@@ -667,6 +667,17 @@ func (response PostVestaV1InstancesIdStart404JSONResponse) VisitPostVestaV1Insta
 	return json.NewEncoder(w).Encode(response)
 }
 
+type PostVestaV1InstancesIdStart409JSONResponse struct {
+	InstanceId string `json:"instance_id"`
+}
+
+func (response PostVestaV1InstancesIdStart409JSONResponse) VisitPostVestaV1InstancesIdStartResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(409)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
 type PostVestaV1InstancesIdStopRequestObject struct {
 	Id string `json:"id"`
 }
@@ -691,6 +702,17 @@ type PostVestaV1InstancesIdStop404JSONResponse struct {
 func (response PostVestaV1InstancesIdStop404JSONResponse) VisitPostVestaV1InstancesIdStopResponse(w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(404)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostVestaV1InstancesIdStop409JSONResponse struct {
+	InstanceId string `json:"instance_id"`
+}
+
+func (response PostVestaV1InstancesIdStop409JSONResponse) VisitPostVestaV1InstancesIdStopResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(409)
 
 	return json.NewEncoder(w).Encode(response)
 }

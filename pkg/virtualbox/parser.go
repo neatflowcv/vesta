@@ -53,3 +53,28 @@ func split(s string) (string, string) {
 
 	return parts[0], parts[1]
 }
+
+func parseVM(data []byte) *VM {
+	const size = 2
+
+	name := ""
+	uuid := ""
+	status := ""
+
+	scanner := bufio.NewScanner(bytes.NewReader(data))
+	for scanner.Scan() {
+		line := scanner.Text()
+		sp := strings.SplitN(line, "=", size)
+
+		switch sp[0] {
+		case "name":
+			name = strings.Trim(sp[1], "\"")
+		case "UUID":
+			uuid = strings.Trim(sp[1], "\"")
+		case "VMState":
+			status = strings.Trim(sp[1], "\"")
+		}
+	}
+
+	return NewVM(uuid, name, status)
+}

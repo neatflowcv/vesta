@@ -8,5 +8,8 @@ import (
 
 type Client interface {
 	ListInstances(ctx context.Context) ([]*domain.Instance, error)
+	GetInstance(ctx context.Context, id string) (*domain.Instance, error)
 	DeleteInstance(ctx context.Context, id string) error
+	StartInstance(ctx context.Context, id string) error
+	StopInstance(ctx context.Context, id string) error
 }

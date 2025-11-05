@@ -12,3 +12,5 @@ linters:
       allow:
         - ResponseObject$
         - error
+    varnamelen:
+      min-name-length: 2

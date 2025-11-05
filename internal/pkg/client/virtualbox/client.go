@@ -37,6 +37,53 @@ func (r *Client) ListInstances(ctx context.Context) ([]*domain.Instance, error) 
 	return ret, nil
 }
 
+func (r *Client) GetInstance(ctx context.Context, id string) (*domain.Instance, error) {
+	vm, err := r.client.ShowVMInfo(ctx, id)
+	if err != nil {
+		if errors.Is(err, virtualbox.ErrVMNotFound) {
+			return nil, client.ErrInstanceNotFound
+		}
+
+		return nil, fmt.Errorf("failed to get instance: %w", err)
+	}
+
+	return domain.NewInstance(vm.ID, vm.Name, mapVBStateToInstanceStatus(vm.Status)), nil
+}
+
+func (r *Client) StartInstance(ctx context.Context, id string) error {
+	err := r.client.StartVM(ctx, id)
+	if err != nil {
+		if errors.Is(err, virtualbox.ErrVMNotFound) {
+			return client.ErrInstanceNotFound
+		}
+
+		if errors.Is(err, virtualbox.ErrVMAlreadyLocked) {
+			return client.ErrInstanceAlreadyRunning
+		}
+
+		return fmt.Errorf("failed to start instance: %w", err)
+	}
+
+	return nil
+}
+
+func (r *Client) StopInstance(ctx context.Context, id string) error {
+	err := r.client.ShutdownVM(ctx, id)
+	if err != nil {
+		if errors.Is(err, virtualbox.ErrVMNotFound) {
+			return client.ErrInstanceNotFound
+		}
+
+		if errors.Is(err, virtualbox.ErrVMNotRunning) {
+			return client.ErrInstanceNotRunning
+		}
+
+		return fmt.Errorf("failed to stop instance: %w", err)
+	}
+
+	return nil
+}
+
 func (r *Client) DeleteInstance(ctx context.Context, id string) error {
 	err := r.client.UnregisterVM(ctx, id)
 	if err != nil {

@@ -108,6 +108,7 @@
             "in": "path",
             "description": "",
             "required": true,
+            "example": "d3854f3b-225f-431e-9a9b-83ef36718ca3",
             "schema": {
               "type": "string"
             }
@@ -143,6 +144,26 @@
               }
             },
             "headers": {}
+          },
+          "409": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "",
+                  "type": "object",
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "instance_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
           }
         },
         "security": []
@@ -162,6 +183,7 @@
             "in": "path",
             "description": "",
             "required": true,
+            "example": "d3854f3b-225f-431e-9a9b-83ef36718ca3",
             "schema": {
               "type": "string"
             }
@@ -184,6 +206,26 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "instance_id"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "",
                   "type": "object",
                   "properties": {
                     "instance_id": {
