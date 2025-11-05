@@ -6,6 +6,7 @@ linters:
     - depguard
     - tagliatelle
     - wsl # deprecated
+    - prealloc
   settings:
     ireturn:
       allow:

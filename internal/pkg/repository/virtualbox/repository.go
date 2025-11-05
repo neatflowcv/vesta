@@ -1,56 +1,72 @@
 package virtualbox
 
 import (
-	"bytes"
 	"context"
+	"errors"
 	"fmt"
-	"log"
-	"os/exec"
 	"strings"
 
 	"github.com/neatflowcv/vesta/internal/pkg/domain"
 	"github.com/neatflowcv/vesta/internal/pkg/repository"
+	"github.com/neatflowcv/vesta/pkg/virtualbox"
 )
 
 var _ repository.Repository = (*Repository)(nil)
 
-type Repository struct{}
+type Repository struct {
+	client *virtualbox.Client
+}
 
 func NewRepository() *Repository {
-	return &Repository{}
+	return &Repository{
+		client: virtualbox.NewClient(),
+	}
 }
 
 func (r *Repository) ListInstances(ctx context.Context) ([]*domain.Instance, error) {
-	cmd := exec.CommandContext(ctx, "vboxmanage", "list", "vms", "--long")
-
-	output, err := cmd.Output()
+	vms, err := r.client.ListVMs(ctx)
 	if err != nil {
-		return nil, fmt.Errorf("failed to list instances: %w", err)
+		return nil, fmt.Errorf("failed to list VMs: %w", err)
 	}
 
-	parser := NewParser()
-	instances := parser.Parse(output)
+	var ret []*domain.Instance
+	for _, vm := range vms {
+		ret = append(ret, domain.NewInstance(vm.ID, vm.Name, mapVBStateToInstanceStatus(vm.Status)))
+	}
 
-	return instances, nil
+	return ret, nil
 }
 
 func (r *Repository) DeleteInstance(ctx context.Context, id string) error {
-	cmd := exec.CommandContext(ctx, "vboxmanage", "unregistervm", "--delete-all", id)
-
-	var stderr bytes.Buffer
-
-	cmd.Stderr = &stderr
-
-	output, err := cmd.Output()
+	err := r.client.UnregisterVM(ctx, id)
 	if err != nil {
-		if strings.Contains(stderr.String(), "Could not find a registered machine named") {
+		if errors.Is(err, virtualbox.ErrVMNotFound) {
 			return repository.ErrInstanceNotFound
 		}
 
-		return fmt.Errorf("failed to delete instance: %w: %s", err, string(output))
+		return fmt.Errorf("failed to delete instance: %w", err)
 	}
 
-	log.Println(string(output))
-
 	return nil
+}
+
+func mapVBStateToInstanceStatus(item string) domain.InstanceStatus {
+	idx := strings.Index(item, "(")
+	if idx != -1 {
+		item = item[:idx]
+	}
+
+	item = strings.TrimSpace(item)
+	switch item {
+	case "running":
+		return domain.InstanceStatusRunning
+	case "powered off", "saved":
+		return domain.InstanceStatusStopped
+	case "stopping", "powering off", "aborted":
+		return domain.InstanceStatusStopping
+	case "starting", "powering on", "booting":
+		return domain.InstanceStatusBooting
+	default:
+		return domain.InstanceStatusUnknown
+	}
 }
