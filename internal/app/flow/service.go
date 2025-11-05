@@ -5,22 +5,22 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/neatflowcv/vesta/internal/pkg/client"
 	"github.com/neatflowcv/vesta/internal/pkg/domain"
-	"github.com/neatflowcv/vesta/internal/pkg/repository"
 )
 
 type Service struct {
-	repository repository.Repository
+	client client.Client
 }
 
-func NewService(repository repository.Repository) *Service {
+func NewService(client client.Client) *Service {
 	return &Service{
-		repository: repository,
+		client: client,
 	}
 }
 
 func (s *Service) ListInstances(ctx context.Context) ([]*domain.Instance, error) {
-	instances, err := s.repository.ListInstances(ctx)
+	instances, err := s.client.ListInstances(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to list instances: %w", err)
 	}
@@ -29,9 +29,9 @@ func (s *Service) ListInstances(ctx context.Context) ([]*domain.Instance, error)
 }
 
 func (s *Service) DeleteInstance(ctx context.Context, id string) error {
-	err := s.repository.DeleteInstance(ctx, id)
+	err := s.client.DeleteInstance(ctx, id)
 	if err != nil {
-		if errors.Is(err, repository.ErrInstanceNotFound) {
+		if errors.Is(err, client.ErrInstanceNotFound) {
 			return ErrInstanceNotFound
 		}
 

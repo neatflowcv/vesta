@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/neatflowcv/vesta/internal/app/flow"
-	"github.com/neatflowcv/vesta/internal/pkg/repository/virtualbox"
+	"github.com/neatflowcv/vesta/internal/pkg/client/virtualbox"
 )
 
 const (
@@ -26,8 +26,8 @@ func version() string {
 func main() {
 	log.Println("version", version())
 
-	repository := virtualbox.NewRepository()
-	service := flow.NewService(repository)
+	client := virtualbox.NewClient()
+	service := flow.NewService(client)
 	handler := NewHandler(service)
 
 	server := &http.Server{ //nolint:exhaustruct

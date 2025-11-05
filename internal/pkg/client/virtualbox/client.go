@@ -6,24 +6,24 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/neatflowcv/vesta/internal/pkg/client"
 	"github.com/neatflowcv/vesta/internal/pkg/domain"
-	"github.com/neatflowcv/vesta/internal/pkg/repository"
 	"github.com/neatflowcv/vesta/pkg/virtualbox"
 )
 
-var _ repository.Repository = (*Repository)(nil)
+var _ client.Client = (*Client)(nil)
 
-type Repository struct {
+type Client struct {
 	client *virtualbox.Client
 }
 
-func NewRepository() *Repository {
-	return &Repository{
+func NewClient() *Client {
+	return &Client{
 		client: virtualbox.NewClient(),
 	}
 }
 
-func (r *Repository) ListInstances(ctx context.Context) ([]*domain.Instance, error) {
+func (r *Client) ListInstances(ctx context.Context) ([]*domain.Instance, error) {
 	vms, err := r.client.ListVMs(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to list VMs: %w", err)
@@ -37,11 +37,11 @@ func (r *Repository) ListInstances(ctx context.Context) ([]*domain.Instance, err
 	return ret, nil
 }
 
-func (r *Repository) DeleteInstance(ctx context.Context, id string) error {
+func (r *Client) DeleteInstance(ctx context.Context, id string) error {
 	err := r.client.UnregisterVM(ctx, id)
 	if err != nil {
 		if errors.Is(err, virtualbox.ErrVMNotFound) {
-			return repository.ErrInstanceNotFound
+			return client.ErrInstanceNotFound
 		}
 
 		return fmt.Errorf("failed to delete instance: %w", err)
